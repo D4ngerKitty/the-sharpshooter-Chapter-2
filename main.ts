@@ -5,9 +5,15 @@ tilemap`level8`,
 tilemap`level9`,
 tilemap`level10`,
 tilemap`level16`,
-tilemap`level28`
+tilemap`level28`,
+tilemap`level29`
 ]
-let Chapter_two_levels = [tilemap`level29`]
+let Text_list = [
+["So this all started with I was hired by the not so strong government of Andor to investigate this strange company", "But why was the company weak??", "It was very corrupt, but there is still good people in there and those good people look for the good of the country"],
+["TEST", "TEST", "TEST"],
+["", "", ""],
+["", "", ""]
+]
 forever(function () {
     for (let value20 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (sprites.readDataNumber(value20, "T") == 10) {

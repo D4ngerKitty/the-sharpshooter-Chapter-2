@@ -196,6 +196,7 @@ function doSomething() {
     for (let value3 of tiles.getTilesByType(assets.tile`myTile15`)) {
         tiles.setTileAt(value3, assets.tile`transparency16`)
     }
+    face = 1
     for (let value4 of tiles.getTilesByType(assets.tile`myTile17`)) {
         E = sprites.create(img`
             . . . . . . . . . . . . . . . . 
@@ -1605,6 +1606,12 @@ function doSomething() {
         tiles.placeOnTile(E, value13)
         tiles.setTileAt(value13, assets.tile`transparency16`)
     }
+
+    if (Story1) {
+        for (let value of Text_list[levelthing]) {
+            story.printCharacterText(value)
+        }
+    }
 }
 function shoot() {
     if (sprites.readDataBoolean(mySprite, "MULTI")) {
@@ -1749,10 +1756,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Power, function (sprite, otherSp
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+     story.clearAllText()
     if (!(spriteutils.isDestroyed(mySprite))) {
-        if (!(sprites.readDataBoolean(mySprite, "RApict"))) {
-            shoot()
+        if (!(spriteutils.isDestroyed(Gun))) {
+            if (!(sprites.readDataBoolean(mySprite, "RApict"))) {
+                shoot()
+            }
         }
+
     }
 })
 function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
@@ -2632,7 +2643,12 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     Gun.z = 10
     scene.cameraFollowSprite(mySprite)
     levelthing = num
-    doSomething()
+    
+    if (Story) {
+        Story1 = true
+    } else {
+        Story1 = false
+    }
     statusbar = statusbars.create(40, 4, StatusBarKind.Health)
     statusbar.max = 20
     statusbar.value = 20
@@ -2647,6 +2663,7 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     if (bool) {
         info.startCountup(true)
     }
+    doSomething()
 }
 function doSomething2(mySprite: Sprite, num: number) {
     if (num == 1) {
@@ -3847,6 +3864,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.EFIRE, function (sprite, otherSp
 })
 let projectile2: Sprite = null
 let Time = 0
+let Story1: boolean
 let E: Sprite = null
 let levelthing = 0
 let list: tiles.TileMapData[] = []
@@ -5439,6 +5457,7 @@ forever(function () {
     }
     if (spriteutils.isDestroyed(mySprite2) && menu) {
         myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+            myMenu.close()
             if (selectedIndex == 0) {
                 level_pick()
             }
@@ -5571,12 +5590,12 @@ forever(function () {
                 ................................................................................................................................................................
                 ................................................................................................................................................................
                 `)
-            myMenu.close()
         })
     }
     if (Level_Pick) {
         ss.onButtonPressed(controller.A, function (selection, selectedIndex) {
             Zoom.SetZoomFilter(1, Mode.Center)
+            ss.close()
             Makeplayer_start_level(selectedIndex, false, true)
             Level_Pick = false
             Cam2.setImage(img`
@@ -5597,7 +5616,6 @@ forever(function () {
                 . . . . . . . . . . . . . . . . 
                 . . . . . . . . . . . . . . . . 
                 `)
-            ss.close()
         })
         ss.onSelectionChanged(function (selection, selectedIndex) {
             if (selectedIndex == 0) {
