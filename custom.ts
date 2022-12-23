@@ -2380,22 +2380,22 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     platformer.loopFrames(
         mySprite,
         [img`
-        b . . . . . e e e . . . . . . . 
-        b a . e e e e e e . . . . . . . 
-        a a . e e f d f . . . . . . . . 
-        a a . e d f d f . . . . . . . . 
-        a a . d d d d d . . . . . . . . 
-        2 2 2 2 2 2 2 2 . . . . . . . . 
-        2 2 2 2 2 2 2 2 2 . . . . . . . 
-        . . 2 2 2 2 2 2 2 . . . . . . . 
-        . . . 2 2 2 2 2 2 2 . . . . . . 
-        . . . 2 3 3 3 3 d b . . . . . . 
-        . . 7 3 . . 7 7 . b . . . . . . 
-        . 7 7 7 . 7 7 7 . . . . . . . . 
-        8 8 7 . 8 8 7 . . . . . . . . . 
-        8 8 . . 8 8 . . . . . . . . . . 
-        8 8 . . 8 8 . . . . . . . . . . 
-        8 . . . 8 . . . . . . . . . . . 
+            . . b . . . . . e e e . . . . .
+            . . b a . e e e e e e . . . . .
+            . . a a . e e f d f . . . . . .
+            . . a a . e d f d f . . . . . .
+            . . a a . d d d d d . . . . . .
+            . . 2 2 2 2 2 2 2 2 . . . . . .
+            . . 2 2 2 2 2 2 2 2 2 . . . . .
+            . . . . 2 2 2 2 2 2 2 . . . . .
+            . . . . . 2 2 2 2 2 2 2 . . . .
+            . . . . . 2 3 3 3 3 d b . . . .
+            . . . . 7 3 . . 7 7 . b . . . .
+            . . . 7 7 7 . 7 7 7 . . . . . .
+            . . 8 8 7 . 8 8 7 . . . . . . .
+            . . 8 8 . . 8 8 . . . . . . . .
+            . . 8 8 . . 8 8 . . . . . . . .
+            . . 8 . . . 8 . . . . . . . . .
         `],
         500,
         platformer.rule(platformer.PlatformerSpriteState.WallSliding, platformer.PlatformerSpriteState.OnWallLeft, platformer.PlatformerSpriteState.JumpingUp)
@@ -2403,22 +2403,22 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     platformer.loopFrames(
         mySprite,
         [img`
-        . . . . . . . e e e . . . . . b 
-        . . . . . . . e e e e e e . a b 
-        . . . . . . . . f d f e e . a a 
-        . . . . . . . . f d f d e . a a 
-        . . . . . . . . d d d d d . a a 
-        . . . . . . . . 2 2 2 2 2 2 2 2 
-        . . . . . . . 2 2 2 2 2 2 2 2 2 
-        . . . . . . . 2 2 2 2 2 2 2 . . 
-        . . . . . . 2 2 2 2 2 2 2 . . . 
-        . . . . . . b d 3 3 3 3 2 . . . 
-        . . . . . . b . 7 7 . . 3 7 . . 
-        . . . . . . . . 7 7 7 . 7 7 7 . 
-        . . . . . . . . . 7 8 8 . 7 8 8 
-        . . . . . . . . . . 8 8 . . 8 8 
-        . . . . . . . . . . 8 8 . . 8 8 
-        . . . . . . . . . . . 8 . . . 8 
+            . . . e e e . . . . . b . . . .
+            . . . e e e e e e . a b . . . .
+            . . . . f d f e e . a a . . . .
+            . . . . f d f d e . a a . . . .
+            . . . . d d d d d . a a . . . .
+            . . . . 2 2 2 2 2 2 2 2 . . . .
+            . . . 2 2 2 2 2 2 2 2 2 . . . .
+            . . . 2 2 2 2 2 2 2 . . . . . .
+            . . 2 2 2 2 2 2 2 . . . . . . .
+            . . b d 3 3 3 3 2 . . . . . . .
+            . . b . 7 7 . . 3 7 . . . . . .
+            . . . . 7 7 7 . 7 7 7 . . . . .
+            . . . . . 7 8 8 . 7 8 8 . . . .
+            . . . . . . 8 8 . . 8 8 . . . .
+            . . . . . . 8 8 . . 8 8 . . . .
+            . . . . . . . 8 . . . 8 . . . .
         `],
         500,
         platformer.rule(platformer.PlatformerSpriteState.WallSliding, platformer.PlatformerSpriteState.OnWallRight, platformer.PlatformerSpriteState.JumpingUp)
@@ -2426,22 +2426,22 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     platformer.loopFrames(
         mySprite,
         [img`
-        b . . . . . e e e . . . . . . . 
-        b a . e e e e e e . . . . . . . 
-        a a . e e f d f . . . . . . . . 
-        a a . e d f d f . . . . . . . . 
-        a a . d d d d d . . . . . . . . 
-        2 2 2 2 2 2 2 2 . . . . . . . . 
-        2 2 2 2 2 2 2 2 2 . . . . . . . 
-        . . 2 2 2 2 2 2 2 . . . . . . . 
-        . . . 2 2 2 2 2 2 2 . . . . . . 
-        . . . 2 3 3 3 3 d b . . . . . . 
-        . . 7 3 . . 7 7 . b . . . . . . 
-        . 7 7 7 . 7 7 7 . . . . . . . . 
-        8 8 7 . 8 8 7 . . . . . . . . . 
-        8 8 . . 8 8 . . . . . . . . . . 
-        8 8 . . 8 8 . . . . . . . . . . 
-        8 . . . 8 . . . . . . . . . . . 
+            . . b . . . . . e e e . . . . .
+            . . b a . e e e e e e . . . . .
+            . . a a . e e f d f . . . . . .
+            . . a a . e d f d f . . . . . .
+            . . a a . d d d d d . . . . . .
+            . . 2 2 2 2 2 2 2 2 . . . . . .
+            . . 2 2 2 2 2 2 2 2 2 . . . . .
+            . . . . 2 2 2 2 2 2 2 . . . . .
+            . . . . . 2 2 2 2 2 2 2 . . . .
+            . . . . . 2 3 3 3 3 d b . . . .
+            . . . . 7 3 . . 7 7 . b . . . .
+            . . . 7 7 7 . 7 7 7 . . . . . .
+            . . 8 8 7 . 8 8 7 . . . . . . .
+            . . 8 8 . . 8 8 . . . . . . . .
+            . . 8 8 . . 8 8 . . . . . . . .
+            . . 8 . . . 8 . . . . . . . . .
         `],
         500,
         platformer.rule(platformer.PlatformerSpriteState.WallSliding, platformer.PlatformerSpriteState.OnWallLeft)
@@ -2449,22 +2449,22 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     platformer.loopFrames(
         mySprite,
         [img`
-        . . . . . . . e e e . . . . . b 
-        . . . . . . . e e e e e e . a b 
-        . . . . . . . . f d f e e . a a 
-        . . . . . . . . f d f d e . a a 
-        . . . . . . . . d d d d d . a a 
-        . . . . . . . . 2 2 2 2 2 2 2 2 
-        . . . . . . . 2 2 2 2 2 2 2 2 2 
-        . . . . . . . 2 2 2 2 2 2 2 . . 
-        . . . . . . 2 2 2 2 2 2 2 . . . 
-        . . . . . . b d 3 3 3 3 2 . . . 
-        . . . . . . b . 7 7 . . 3 7 . . 
-        . . . . . . . . 7 7 7 . 7 7 7 . 
-        . . . . . . . . . 7 8 8 . 7 8 8 
-        . . . . . . . . . . 8 8 . . 8 8 
-        . . . . . . . . . . 8 8 . . 8 8 
-        . . . . . . . . . . . 8 . . . 8 
+            . . . e e e . . . . . b . . . .
+            . . . e e e e e e . a b . . . .
+            . . . . f d f e e . a a . . . .
+            . . . . f d f d e . a a . . . .
+            . . . . d d d d d . a a . . . .
+            . . . . 2 2 2 2 2 2 2 2 . . . .
+            . . . 2 2 2 2 2 2 2 2 2 . . . .
+            . . . 2 2 2 2 2 2 2 . . . . . .
+            . . 2 2 2 2 2 2 2 . . . . . . .
+            . . b d 3 3 3 3 2 . . . . . . .
+            . . b . 7 7 . . 3 7 . . . . . .
+            . . . . 7 7 7 . 7 7 7 . . . . .
+            . . . . . 7 8 8 . 7 8 8 . . . .
+            . . . . . . 8 8 . . 8 8 . . . .
+            . . . . . . 8 8 . . 8 8 . . . .
+            . . . . . . . 8 . . . 8 . . . .
         `],
         500,
         platformer.rule(platformer.PlatformerSpriteState.WallSliding, platformer.PlatformerSpriteState.OnWallRight)
