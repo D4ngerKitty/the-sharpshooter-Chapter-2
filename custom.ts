@@ -170,12 +170,12 @@ function All_powers() {
 }
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (!(spriteutils.isDestroyed(mySprite2))) {
-        if (menu) {
+        if (Story1) {
             mySprite2.destroy()
             myMenu = miniMenu.createMenu(
-                miniMenu.createMenuItem("Story"),
-                miniMenu.createMenuItem("Speed Run"),
-                miniMenu.createMenuItem("No Story")
+                miniMenu.createMenuItem("Chaper 1"),
+                miniMenu.createMenuItem("Chaper 2"),
+                miniMenu.createMenuItem("Chaper 3")
             )
             myMenu.setPosition(0, 0)
         }
@@ -191,7 +191,12 @@ statusbars.onZero(StatusBarKind.Health, function (status) {
     doSomething()
 })
 function doSomething() {
-    tiles.setCurrentTilemap(tileUtil.cloneMap(LEvelsthings[levelthing]))
+    if (THECHAPER == 0) {
+        tiles.setCurrentTilemap(tileUtil.cloneMap(LEvelsthings[levelthing]))
+    }
+    if (THECHAPER == 1) {
+        tiles.setCurrentTilemap(tileUtil.cloneMap(Levelthing2[levelthing]))
+    }
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile15`)
     for (let value3 of tiles.getTilesByType(assets.tile`myTile15`)) {
         tiles.setTileAt(value3, assets.tile`transparency16`)
@@ -1608,8 +1613,15 @@ function doSomething() {
     }
 
     if (Story1) {
-        for (let value of Text_list[levelthing]) {
-            story.printCharacterText(value)
+        if (THECHAPER == 0) {
+            for (let value of Text_list[levelthing]) {
+                story.printCharacterText(value)
+            }
+        }
+        if (THECHAPER == 1) {
+            for (let value of Textlist2[levelthing]) {
+                story.printCharacterText(value)
+            }
         }
     }
 }
@@ -3880,7 +3892,8 @@ let projectile: Sprite = null
 let face = 0
 let mySprite2: Sprite = null
 let menu = false
-menu = true
+Story1 = true
+let THECHAPER: number
 mySprite2 = sprites.create(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
@@ -5455,7 +5468,7 @@ forever(function () {
             }
         }
     }
-    if (spriteutils.isDestroyed(mySprite2) && menu) {
+    if (menu) {
         myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
             myMenu.close()
             if (selectedIndex == 0) {
@@ -5590,6 +5603,21 @@ forever(function () {
                 ................................................................................................................................................................
                 ................................................................................................................................................................
                 `)
+        })
+    }
+    if (spriteutils.isDestroyed(mySprite2) && Story1) {
+        myMenu.onButtonPressed(controller.A, function (selection, selectedIndex) {
+            myMenu.close()
+
+            myMenu = miniMenu.createMenu(
+                miniMenu.createMenuItem("Story"),
+                miniMenu.createMenuItem("Speed Run"),
+                miniMenu.createMenuItem("No Story")
+            )
+            myMenu.setPosition(0, 0)
+            THECHAPER = selectedIndex
+            menu = true
+            Story1 = false
         })
     }
     if (Level_Pick) {
