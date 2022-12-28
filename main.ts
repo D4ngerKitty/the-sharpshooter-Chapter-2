@@ -1,3 +1,14 @@
+/**
+ * TODO
+ * 
+ * Make it easier to make emays 
+ * 
+ * Make many many level make it easier to do the world map for story 
+ * 
+ * Make a world map for chapter two 
+ * 
+ * add story to both chapters
+ */
 let LEvelsthings = [
 tilemap`level2`,
 tilemap`level4`,
