@@ -51,59 +51,17 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
     }
     otherSprite.destroy()
 })
-function doSomething3(num: number, num2: number) {
-    if (face == 8) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, -200, -200)
-        projectile.vx += num
-        projectile.vy += num2
-    } else if (face == 7) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, 200, -200)
-        projectile.vx += num
-        projectile.vy += num2
-    } else if (face == 6) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, 200, 200)
-        projectile.vx += num
-        projectile.vy += num2
-    } else if (face == 5) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, -200, 200)
-        projectile.vx += num
-        projectile.vy += num2
-    } else if (face == 1) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, 0, -200)
-        projectile.vx += num
-    } else if (face == 2) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, -200, 0)
-        projectile.vy += num2
-    } else if (face == 3) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, 200, 0)
-        projectile.vy += num2
-    } else if (face == 4) {
-        projectile = sprites.createProjectileFromSprite(img`
-            b b 
-            b b 
-            `, Gun, 0, 200)
-        projectile.vx += num
+function generateProjectile(num: number, num2: number) {
+    projectile = sprites.createProjectileFromSprite(img`
+            b b
+            b b
+        `, Gun, Math.imul(200, dirXArray[face - 1]), Math.imul(200, dirYArray[face - 1]))
+    if (face <= 4) {
+        projectile.vy += Math.imul(num, dirXArray[face - 1])
+        projectile.vx += Math.imul(num2, dirYArray[face - 1])
+    } else {
+        projectile.vx -= Math.imul(num, dirXArray[face - 1])
+        projectile.vy += Math.imul(num2, dirYArray[face - 1])
     }
     projectile.setFlag(SpriteFlag.AutoDestroy, false)
 }
@@ -1699,10 +1657,10 @@ function doSomething() {
 }
 function shoot() {
     if (sprites.readDataBoolean(mySprite, "MULTI")) {
-        doSomething3(20, 20)
-        doSomething3(-20, -20)
+        generateProjectile(20, 20)
+        generateProjectile(-20, -20)
     }
-    doSomething3(0, 0)
+    generateProjectile(0, 0)
 }
 function old_levels() {
     scene.setBackgroundImage(img`
@@ -3946,6 +3904,8 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.EFIRE, function (sprite, otherSp
         otherSprite.setFlag(SpriteFlag.GhostThroughSprites, false)
     })
 })
+let dirXArray = [0, -1, 1, 0, -1, 1, 1, -1]
+let dirYArray = [-1, 0, 0, 1, 1, 1, -1, -1]
 let projectile2: Sprite = null
 let Time = 0
 let Story1: boolean
