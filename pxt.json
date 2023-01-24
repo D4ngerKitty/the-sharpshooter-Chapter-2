@@ -1,5 +1,5 @@
 {
-    "name": "The Sharpshooter ",
+    "name": "The Sharpshooter  - Copy",
     "version": "0.0.4",
     "description": "",
     "dependencies": {
@@ -43,7 +43,7 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "palette": [
         "#000000",
         "#f5edba",

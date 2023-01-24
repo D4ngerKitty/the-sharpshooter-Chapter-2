@@ -66,7 +66,12 @@ function generateProjectile(num: number, num2: number) {
     projectile.setFlag(SpriteFlag.AutoDestroy, false)
 }
 function level_pick() {
-    tiles.setCurrentTilemap(tilemap`level11`)
+    if (THECHAPER == 0) {
+        tiles.setCurrentTilemap(tilemap`level54`)
+    }
+    if (THECHAPER == 1) {
+        tiles.setCurrentTilemap(tilemap`level57`)
+    }
     Zoom.SetZoomFilter(2, Mode.Center)
     Cam2 = sprites.create(img`
         4 4 4 . . . . . . . . . . 4 4 4 
@@ -5678,6 +5683,8 @@ forever(function () {
                 `)
         })
         ss.onSelectionChanged(function (selection, selectedIndex) {
+            
+            
             if (selectedIndex == 0) {
                 tiles.placeOnRandomTile(fL, assets.tile`myTile63`)
             } else {
