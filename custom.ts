@@ -1,6 +1,7 @@
 namespace SpriteKind {
     export const cat = SpriteKind.create()
     export const EFIRE = SpriteKind.create()
+    export const NPC = SpriteKind.create()
     export const MUSH = SpriteKind.create()
     export const MULTISHOTT = SpriteKind.create()
     export const Power = SpriteKind.create()
@@ -593,7 +594,7 @@ function doSomething() {
             1111111111111111111111111111111111555555551116666666611111111111
             1111111111111111111111111111111111555555551116666666611111111111
             1111111111111111111111111111111111555555551116666666611111111111
-            `, SpriteKind.Enemy)
+        `, SpriteKind.Enemy)
         characterAnimations.loopFrames(
             E,
             [img`
@@ -1268,22 +1269,22 @@ function doSomething() {
         characterAnimations.loopFrames(
             E,
             [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . 2 . . . . . 
-            . 6 6 6 3 3 3 3 . 2 2 3 . . . . 
-            . 6 6 6 6 3 3 3 . 2 2 2 . . . . 
-            . 6 f 6 f 6 3 3 . . 1 . . . . . 
-            . 6 f 6 6 6 6 6 . . 1 . . . . . 
-            . 6 6 6 6 6 6 6 . 1 b . . . . . 
-            . 6 3 6 6 6 6 3 2 2 2 3 . . . . 
-            . 3 3 6 c 6 6 3 2 2 2 2 . . . . 
-            . . . . c 6 3 c 2 c 2 2 . . . . 
-            . 3 2 . c c c c c c 2 c . . . . 
-            2 2 2 1 d 1 1 1 1 d c c . . . . 
-            . 2 2 . c c d c 8 1 c c . . . . 
-            . . . . c c c 8 c c c c . . . . 
-            . . . . 8 8 8 c c c c c . . . . 
-            . . . . c c c c c c c c . . . . 
+                . . . . . . . . . . . . . . . .
+                . . . . . . . . . . 2 . . . . .
+                . 6 6 6 3 3 3 3 . 2 2 3 . . . .
+                . 6 6 6 6 3 3 3 . 2 2 2 . . . .
+                . 6 f 6 f 6 3 3 . . 1 . . . . .
+                . 6 f 6 6 6 6 6 . . 1 . . . . .
+                . 6 6 6 6 6 6 6 . 1 b . . . . .
+                . 6 3 6 6 6 6 3 2 2 2 3 . . . .
+                . 3 3 6 c 6 6 3 2 2 2 2 . . . .
+                . . . . c 6 3 c 2 c 2 2 . . . .
+                . 3 2 . c c c c c c 2 c . . . .
+                2 2 2 1 d 1 1 1 1 d c c . . . .
+                . 2 2 . c c d c 8 1 c c . . . .
+                . . . . c c c 8 c c c c . . . .
+                . . . . 8 8 8 c c c c c . . . .
+                . . . . c c c c c c c c . . . .
             `],
             500,
             characterAnimations.rule(Predicate.FacingLeft)
@@ -1400,22 +1401,22 @@ function doSomething() {
         characterAnimations.loopFrames(
             E,
             [img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . 3 3 2 3 2 2 . . . 
-            . . . . . . . 3 2 3 3 3 2 . . . 
-            . . . . . . 2 2 2 2 3 2 2 3 . . 
-            . . . . . . 3 2 2 2 2 2 3 3 . . 
-            . . . . . . . 1 1 d f 1 f . . . 
-            . . . . . . . d 1 d 1 1 f . . . 
-            . . . . . . . 1 1 1 1 d 1 . . . 
-            . . . . . 3 2 1 d 1 1 2 1 3 3 . 
-            . . . . . 2 2 2 b 1 2 2 2 2 3 . 
-            . . . . . 2 3 b b 8 3 3 2 2 2 . 
-            . . . . . 3 3 b b a 8 b b 2 2 . 
-            . . . . . 1 1 b a a a b 8 1 . . 
-            . . . . . d 1 a a a a a 8 . . . 
-            . . . . . . . a a a a a a . . . 
-            . . . . . . . a a a a a a . . . 
+                . . . . . . . . . . . . . . . .
+                . . . . . . . 3 3 2 3 2 2 . . .
+                . . . . . . . 3 2 3 3 3 2 . . .
+                . . . . . . 2 2 2 2 3 2 2 3 . .
+                . . . . . . 3 2 2 2 2 2 3 3 . .
+                . . . . . . . 1 1 d f 1 f . . .
+                . . . . . . . d 1 d 1 1 f . . .
+                . . . . . . . 1 1 1 1 d 1 . . .
+                . . . . . 3 2 1 d 1 1 2 1 3 3 .
+                . . . . . 2 2 2 b 1 2 2 2 2 3 .
+                . . . . . 2 3 b b 8 3 3 2 2 2 .
+                . . . . . 3 3 b b a 8 b b 2 2 .
+                . . . . . 1 1 b a a a b 8 1 . .
+                . . . . . d 1 a a a a a 8 . . .
+                . . . . . . . a a a a a a . . .
+                . . . . . . . a a a a a a . . .
             `],
             500,
             characterAnimations.rule(Predicate.FacingRight)
@@ -1477,6 +1478,61 @@ function doSomething() {
         )
         sprites.setDataNumber(E, "T", 9)
         sprites.setDataNumber(E, "HP", 6)
+        E.vx = 60
+        E.ay = 200
+        tiles.placeOnTile(E, value13)
+        tiles.setTileAt(value13, assets.tile`transparency16`)
+    }
+    for (let value13 of tiles.getTilesByType(assets.tile`myTile95`)) {
+        E = sprites.create(assets.tile`myTile53`, SpriteKind.NPC)
+        characterAnimations.loopFrames(
+            E,
+            [img`
+                . . . . . b . b . . . . . . . .
+                . . . . . b b b b b . . . . . .
+                . . . . . b a a a a a . . . . .
+                . . . . . . f 2 f 2 a . . . . .
+                . . . . . . f 2 f 2 a . b b b .
+                . . . . . . 3 2 3 a a . . b b .
+                . . . . . . 3 2 3 a a a b . b .
+                . . . . . a a a a a a a a . . .
+                . . . . . a a a a a a a a . . .
+                . . . . a a a a a a a . a a . .
+                . . . . 3 3 a a a a a . 3 3 . .
+                . . . . . b c c . c c . 3 3 . .
+                . . . . b . c c . c c . . . . .
+                . . . b . . . 2 2 . 2 2 . . . .
+                . . . . . . . 2 2 . 2 2 . . . .
+                . . . . . . 2 2 2 . 2 2 . . . .
+            `],
+            500,
+            characterAnimations.rule(Predicate.FacingLeft)
+        )
+        characterAnimations.loopFrames(
+            E,
+            [img`
+                . . . . . . . . b . b . . . . .
+                . . . . . . b b b b b . . . . .
+                . . . . . a a a a a b . . . . .
+                . . . . . a 2 f 2 f . . . . . .
+                . b b b . a 2 f 2 f . . . . . .
+                . b b . . a a 3 2 3 . . . . . .
+                . b . b a a a 3 2 3 . . . . . .
+                . . . a a a a a a a a . . . . .
+                . . . a a a a a a a a . . . . .
+                . . a a . a a a a a a a . . . .
+                . . 3 3 . a a a a a 3 3 . . . .
+                . . 3 3 . c c . c c b . . . . .
+                . . . . . c c . c c . b . . . .
+                . . . . 2 2 . 2 2 . . . b . . .
+                . . . . 2 2 . 2 2 . . . . . . .
+                . . . . 2 2 . 2 2 2 . . . . . .
+            `],
+            500,
+            characterAnimations.rule(Predicate.FacingRight)
+        )
+        sprites.setDataNumber(E, "T", 1)
+        sprites.setDataNumber(E, "HP", 20)
         E.vx = 60
         E.ay = 200
         tiles.placeOnTile(E, value13)
@@ -1815,23 +1871,23 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     mySprite = platformer.create(img`
-        . . . . . . . . . . . . . . . . 
-        . . . . . . . . e e e . . . . . 
-        . . . . . e e e e e e . . . . . 
-        . . . . . e e f d f . . . . . . 
-        . . . . . e d f d f . . . . . . 
-        . . . . . d d d d d . . . . . . 
-        . . . . 2 2 2 2 2 2 . . . . . . 
-        . . . 2 2 2 2 2 2 2 2 . . . . . 
-        . . . 2 2 2 2 2 2 2 2 . . . . . 
-        . . a a . 2 2 2 2 2 2 2 . . . . 
-        . . a a . 2 3 3 3 3 d b . . . . 
-        . . a a . 3 7 . 7 7 . b . . . . 
-        . . a b . 7 7 . 7 7 . . . . . . 
-        . . . b 8 8 . 8 8 . . . . . . . 
-        . . . . 8 8 . 8 8 . . . . . . . 
-        . . . . 8 8 . 8 8 8 . . . . . . 
-        `, SpriteKind.Player)
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . e e e . . . . .
+        . . . . . e e e e e e . . . . .
+        . . . . . e e f d f . . . . . .
+        . . . . . e d f d f . . . . . .
+        . . . . . d d d d d . . . . . .
+        . . . . 2 2 2 2 2 2 . . . . . .
+        . . . 2 2 2 2 2 2 2 2 . . . . .
+        . . . 2 2 2 2 2 2 2 2 . . . . .
+        . . a a . 2 2 2 2 2 2 2 . . . .
+        . . a a . 2 3 3 3 3 d b . . . .
+        . . a a . 3 7 . 7 7 . b . . . .
+        . . a b . 7 7 . 7 7 . . . . . .
+        . . . b 8 8 . 8 8 . . . . . . .
+        . . . . 8 8 . 8 8 . . . . . . .
+        . . . . 8 8 . 8 8 8 . . . . . .
+    `, SpriteKind.Player)
     platformer.loopFrames(
         mySprite,
         [img`
@@ -4340,6 +4396,15 @@ game.onUpdateInterval(500, function () {
     }
 })
 forever(function () {
+    for (let value100 of spriteutils.getSpritesWithin(SpriteKind.NPC, 50, mySprite) {
+        if (sprites.readDataNumber(value100, "T") == 1)  {
+            story.printCharacterText("My Brother I will avenge you!!!")
+            sprites.setDataNumber(value100, "T", 2)
+
+        }      
+    }; 
+
+    
     for (let value20 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (sprites.readDataNumber(value20, "T") == 3) {
             if (!(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom).getNeighboringLocation(CollisionDirection.Left))) && !(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) || tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) {
