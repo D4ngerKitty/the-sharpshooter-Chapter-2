@@ -5683,13 +5683,39 @@ forever(function () {
                 `)
         })
         ss.onSelectionChanged(function (selection, selectedIndex) {
-            
-            
-            if (selectedIndex == 0) {
-                tiles.placeOnRandomTile(fL, assets.tile`myTile63`)
+            if (THECHAPER == 0) {
+                if (selectedIndex == 0) {
+                    tiles.placeOnRandomTile(fL, assets.tile`myTile63`)
+                } else {
+                    if (selectedIndex == 1) {
+                        tiles.placeOnRandomTile(fL, assets.tile`myTile64`)
+                    } else {
+                        if (selectedIndex == 2) {
+                            tiles.placeOnRandomTile(fL, assets.tile`myTile67`)
+                        } else {
+                            if (selectedIndex == 3) {
+                                tiles.placeOnRandomTile(fL, assets.tile`myTile72`)
+                            } else {
+                                if (selectedIndex == 4) {
+                                    tiles.placeOnRandomTile(fL, assets.tile`myTile69`)
+                                } else if (selectedIndex == 5) {
+                                    tiles.placeOnRandomTile(fL, assets.tile`myTile73`)
+
+                                } else if (selectedIndex == 6) {
+                                    tiles.placeOnRandomTile(fL, assets.tile`myTile76`)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (THECHAPER == 1) {
+                
+                 if (selectedIndex == 0) {
+                     tiles.placeOnRandomTile(fL, assets.tile`myTile80`)
             } else {
                 if (selectedIndex == 1) {
-                    tiles.placeOnRandomTile(fL, assets.tile`myTile64`)
+                    tiles.placeOnRandomTile(fL, assets.tile`myTile81`)
                 } else {
                     if (selectedIndex == 2) {
                         tiles.placeOnRandomTile(fL, assets.tile`myTile67`)
@@ -5709,6 +5735,8 @@ forever(function () {
                     }
                 }
             }
+            }
+ 
         })
     }
 })

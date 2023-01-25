@@ -17,7 +17,9 @@ tilemap`level16`,
 tilemap`level28`,
 tilemap`level46`
 ]
-let Levelthing2 = [tilemap`level53`]
+let Levelthing2= [tilemap`level53`,
+    tilemap`level69`,
+]
 let Text_list = [
 ["So this all started with I was hired by the not so strong government of Andor to investigate this strange company", "But why was the company weak??", "It was very corrupt, but there is still good people in there and those good people look for the good of the country"],
 ["So after seeing all the mushroom zombies and the lab's experiments. I headed off to a nearby town to meet up with my employer. ", " Ok but why do u have to do this any way", "Because I was paid to do it. Have you even been paying attention to my story!"],
@@ -36,7 +38,7 @@ let Text_list = [
 ["All the mushrooms are gone finely!!"]
 ]
 let Textlist2 = [
-["TEST", "TEST", "TEST"],
+ ["The strange company form the last Adventure", "So they're back?", "Yes and they are trying to take over the planit"],
 ["TEST", "TEST", "TEST"],
 ["", "", ""],
 ["", "", ""],
