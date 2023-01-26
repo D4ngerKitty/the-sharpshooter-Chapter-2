@@ -9,6 +9,7 @@ namespace SpriteKind {
     export const background = SpriteKind.create()
     export const falow = SpriteKind.create()
 }
+
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
     if (sprites.readDataNumber(sprite, "HP") <= 0) {
         sprite.destroy(effects.disintegrate, 500)
@@ -3988,6 +3989,29 @@ let mySprite2: Sprite = null
 let menu = false
 Story1 = true
 let THECHAPER: number
+controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (menuopen) {
+        myMenu2.setFlag(SpriteFlag.Invisible, true)
+        myMenu2.setButtonEventsEnabled(false)
+        menuopen = false
+    } else {
+        myMenu2.setFlag(SpriteFlag.Invisible, false)
+        myMenu2.setButtonEventsEnabled(true)
+        menuopen = true
+    }
+})
+let menuopen = false
+let myMenu2: miniMenu.MenuSprite = null
+let text_list = [miniMenu.createMenuItem("The Sharpshooter")]
+if (blockSettings.exists("KOM")) {
+    text_list.push(miniMenu.createMenuItem("Knight of the mushrooms"))
+}
+myMenu2 = miniMenu.createMenuFromArray(text_list)
+myMenu2.setPosition(0, 0)
+myMenu2.setFlag(SpriteFlag.Invisible, true)
+myMenu2.setButtonEventsEnabled(false)
+menuopen = false
+
 mySprite2 = sprites.create(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
@@ -4397,15 +4421,16 @@ game.onUpdateInterval(500, function () {
     }
 })
 forever(function () {
-    for (let value100 of spriteutils.getSpritesWithin(SpriteKind.NPC, 50, mySprite)){
-        if (sprites.readDataNumber(value100, "T") == 1)  {
-            story.printCharacterText("My Brother I will avenge you!!!")
-            sprites.setDataNumber(value100, "T", 2)
+    if (levelthing == 1){
+        for (let value100 of spriteutils.getSpritesWithin(SpriteKind.NPC, 50, mySprite)){
+            if (sprites.readDataNumber(value100, "T") == 1)  {
+               story.printCharacterText("My Brother I will avenge you!!!")
+               story.printCharacterText("I will save our people form this infection")
+              sprites.setDataNumber(value100, "T", 2)
 
-        }      
-    }; 
-
-    
+            }      
+        };  
+    }  
     for (let value20 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (sprites.readDataNumber(value20, "T") == 3) {
             if (!(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom).getNeighboringLocation(CollisionDirection.Left))) && !(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) || tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) {
