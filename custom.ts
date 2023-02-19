@@ -57,13 +57,13 @@ function generateProjectile(num: number, num2: number) {
     projectile = sprites.createProjectileFromSprite(img`
             b b
             b b
-        `, Gun, Math.imul(200, dirXArray[face - 1]), Math.imul(200, dirYArray[face - 1]))
-    if (face <= 4) {
-        projectile.vy += Math.imul(num, dirXArray[face - 1])
-        projectile.vx += Math.imul(num2, dirYArray[face - 1])
+        `, Gun, Math.imul(200, dirXArray[face]), Math.imul(200, dirYArray[face]))
+    if (face <= 3) {
+        projectile.vy += Math.imul(num, dirXArray[face])
+        projectile.vx += Math.imul(num2, dirYArray[face])
     } else {
-        projectile.vx -= Math.imul(num, dirXArray[face - 1])
-        projectile.vy += Math.imul(num2, dirYArray[face - 1])
+        projectile.vx -= Math.imul(num, dirXArray[face])
+        projectile.vy += Math.imul(num2, dirYArray[face])
     }
     projectile.setFlag(SpriteFlag.AutoDestroy, false)
 }
@@ -166,7 +166,7 @@ function doSomething() {
     for (let value3 of tiles.getTilesByType(assets.tile`myTile15`)) {
         tiles.setTileAt(value3, assets.tile`transparency16`)
     }
-    face = 1
+    face = 0
     for (let value4 of tiles.getTilesByType(assets.tile`myTile17`)) {
         E = sprites.create(img`
             . . . . . . . . . . . . . . . .
@@ -520,7 +520,7 @@ function doSomething() {
         sprites.setDataNumber(E, "T", 9)
         sprites.setDataNumber(E, "HP", 30)
         E.ay = 200
-        E.setScale(8 , ScaleAnchor.Middle)
+        E.setScale(8, ScaleAnchor.Middle)
         tiles.placeOnTile(E, BTB)
         tiles.setTileAt(BTB, assets.tile`transparency16`)
     }
@@ -1861,7 +1861,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Power, function (sprite, otherSp
     }
 })
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
-     story.clearAllText()
+    story.clearAllText()
     if (!(spriteutils.isDestroyed(mySprite))) {
         if (!(spriteutils.isDestroyed(Gun))) {
             if (!(sprites.readDataBoolean(mySprite, "RApict"))) {
@@ -2748,7 +2748,7 @@ function Makeplayer_start_level(num: number, bool: boolean, Story: boolean) {
     Gun.z = 10
     scene.cameraFollowSprite(mySprite)
     levelthing = num
-    
+
     if (Story) {
         Story1 = true
     } else {
@@ -4421,16 +4421,16 @@ game.onUpdateInterval(500, function () {
     }
 })
 forever(function () {
-    if (levelthing == 1){
-        for (let value100 of spriteutils.getSpritesWithin(SpriteKind.NPC, 50, mySprite)){
-            if (sprites.readDataNumber(value100, "T") == 1)  {
-               story.printCharacterText("My Brother I will avenge you!!!")
-               story.printCharacterText("I will save our people form this infection")
-              sprites.setDataNumber(value100, "T", 2)
+    if (levelthing == 1) {
+        for (let value100 of spriteutils.getSpritesWithin(SpriteKind.NPC, 50, mySprite)) {
+            if (sprites.readDataNumber(value100, "T") == 1) {
+                story.printCharacterText("My Brother I will avenge you!!!")
+                story.printCharacterText("I will save our people form this infection")
+                sprites.setDataNumber(value100, "T", 2)
 
-            }      
-        };  
-    }  
+            }
+        };
+    }
     for (let value20 of sprites.allOfKind(SpriteKind.Enemy)) {
         if (sprites.readDataNumber(value20, "T") == 3) {
             if (!(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Bottom).getNeighboringLocation(CollisionDirection.Left))) && !(tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) || tiles.tileAtLocationIsWall(value20.tilemapLocation().getNeighboringLocation(CollisionDirection.Left))) {
@@ -4532,21 +4532,21 @@ game.onUpdate(function () {
 })
 forever(function () {
     if (controller.up.isPressed() && controller.left.isPressed()) {
-        face = 8
-    } else if (controller.up.isPressed() && controller.right.isPressed()) {
         face = 7
-    } else if (controller.down.isPressed() && controller.right.isPressed()) {
+    } else if (controller.up.isPressed() && controller.right.isPressed()) {
         face = 6
-    } else if (controller.down.isPressed() && controller.left.isPressed()) {
+    } else if (controller.down.isPressed() && controller.right.isPressed()) {
         face = 5
-    } else if (controller.up.isPressed()) {
-        face = 1
-    } else if (controller.left.isPressed()) {
-        face = 2
-    } else if (controller.right.isPressed()) {
-        face = 3
-    } else if (controller.down.isPressed()) {
+    } else if (controller.down.isPressed() && controller.left.isPressed()) {
         face = 4
+    } else if (controller.up.isPressed()) {
+        face = 0
+    } else if (controller.left.isPressed()) {
+        face = 1
+    } else if (controller.right.isPressed()) {
+        face = 2
+    } else if (controller.down.isPressed()) {
+        face = 3
     }
 })
 forever(function () {
@@ -4566,8 +4566,8 @@ forever(function () {
             sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
             statusbar.max = 20
             statusbar.value = 20
-                levelthing += 1
-                doSomething()
+            levelthing += 1
+            doSomething()
         }
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile52`)) {
             All_powers()
@@ -4611,934 +4611,22 @@ forever(function () {
 forever(function () {
     if (!(spriteutils.isDestroyed(mySprite))) {
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingLeft) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.OnGround)) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . b . . . . . . . . 
-                    . . . . . . . . b a . . . . . . 
-                    . . . . . . . . a a a . . . . . 
-                    . . . . . . . . . a a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . b . 
-                    . . . . . . . . . . . . a b . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . . . a b . . 
-                    . . . . . . . . . . . . . . b . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . a a a . . . . 
-                    . . . . . . . . a a a . . . . . 
-                    . . . . . . . . b a . . . . . . 
-                    . . . . . . . b . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . b . . . . . 
-                    . . . . . . . . . . b a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . b b a a a . . . . 
-                    . . . . . . . . a a a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a a b b . 
-                    . . . . . . . . . . a a a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . b a . . . . 
-                    . . . . . . . . . . b . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingRight) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.OnGround)) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    b a . . . . . . . . . . . . . . 
-                    a a a . . . . . . . . . . . . . 
-                    . a a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . b . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . . . . b . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . a a a . . . . . . . . . . . . 
-                    a a a . . . . . . . . . . . . . 
-                    b a . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . b . . . . . . . . . . . . . 
-                    . . b a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    b b a a a . . . . . . . . . . . 
-                    . a a a a . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a a b b . . . . . . . . . 
-                    . . a a a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a b . . . . . . . . . . . . 
-                    . . . b . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face + 8])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingLeft) && (platformer.hasState(mySprite, platformer.PlatformerSpriteState.Moving) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.OnGround))) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . b . . . . . . . . 
-                    . . . . . . . . b a . . . . . . 
-                    . . . . . . . . a a a . . . . . 
-                    . . . . . . . . . a a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . b . 
-                    . . . . . . . . . . . . a b . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . . . a b . . 
-                    . . . . . . . . . . . . . . b . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . a a a . . . . 
-                    . . . . . . . . a a a . . . . . 
-                    . . . . . . . . b a . . . . . . 
-                    . . . . . . . b . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . b . . . . 
-                    . . . . . . . . . . a b . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . b b a a a . . . . 
-                    . . . . . . . . a a a a . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a a b b . 
-                    . . . . . . . . . . a a a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . a a . . . . 
-                    . . . . . . . . . . b a . . . . 
-                    . . . . . . . . . . b . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face + 16])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingRight) && (platformer.hasState(mySprite, platformer.PlatformerSpriteState.Moving) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.OnGround))) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . b . . . . . . . . . . . . . . 
-                    . . b a . . . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . b . . . . . . . 
-                    . . . . . . a b . . . . . . . . 
-                    . . . . . a a a . . . . . . . . 
-                    . . . . a a a . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a a a . . . . . . . . . 
-                    . . . . . a a a . . . . . . . . 
-                    . . . . . . a b . . . . . . . . 
-                    . . . . . . . . b . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . b a . . . . . . . . . . . . 
-                    . b . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . b . . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . b b a a a . . . . . . . . . . 
-                    . . a a a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . a a a b b . . . . . . . 
-                    . . . . a a a a . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a a . . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . . . b . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face + 24])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingLeft) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.JumpingUp)) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . b . . . . . . 
-                    . . . . . . . . . . b a . . . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . a b 
-                    . . . . . . . . . . . . . a a a 
-                    . . . . . . . . . . . . a a a . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . a a a . 
-                    . . . . . . . . . . . . . a a a 
-                    . . . . . . . . . . . . . . a b 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . a a a . . 
-                    . . . . . . . . . . a a a . . . 
-                    . . . . . . . . . . b a . . . . 
-                    . . . . . . . . . b . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . b . . 
-                    . . . . . . . . . . . . a b . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . b b a a a . . 
-                    . . . . . . . . . . a a a a . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . a a a b b 
-                    . . . . . . . . . . . a a a a . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . a a . . 
-                    . . . . . . . . . . . . b a . . 
-                    . . . . . . . . . . . . b . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face + 32])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.FacingRight) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.JumpingUp)) {
-            if (face == 8) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    b a . . . . . . . . . . . . . . 
-                    a a a . . . . . . . . . . . . . 
-                    . a a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 7) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . b . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 6) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a a . . . . . . . . . . . 
-                    . . . a a a . . . . . . . . . . 
-                    . . . . a b . . . . . . . . . . 
-                    . . . . . . b . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 5) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . a a a . . . . . . . . . . . . 
-                    a a a . . . . . . . . . . . . . 
-                    b a . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 1) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . b . . . . . . . . . . . . . 
-                    . . b a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 2) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    b b a a a . . . . . . . . . . . 
-                    . a a a a . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 3) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a a b b . . . . . . . . . 
-                    . . a a a a . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            } else if (face == 4) {
-                Gun.setImage(img`
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a a . . . . . . . . . . . . 
-                    . . a b . . . . . . . . . . . . 
-                    . . . b . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    . . . . . . . . . . . . . . . . 
-                    `)
-            }
+            Gun.setImage(gunImgs[face + 40])
         }
         if (platformer.hasState(mySprite, platformer.PlatformerSpriteState.OnWallLeft) && platformer.hasState(mySprite, platformer.PlatformerSpriteState.WallSliding)) {
             Gun.setImage(img`
@@ -5775,59 +4863,11 @@ forever(function () {
         })
         ss.onSelectionChanged(function (selection, selectedIndex) {
             if (THECHAPER == 0) {
-                if (selectedIndex == 0) {
-                    tiles.placeOnRandomTile(fL, assets.tile`myTile63`)
-                } else {
-                    if (selectedIndex == 1) {
-                        tiles.placeOnRandomTile(fL, assets.tile`myTile64`)
-                    } else {
-                        if (selectedIndex == 2) {
-                            tiles.placeOnRandomTile(fL, assets.tile`myTile67`)
-                        } else {
-                            if (selectedIndex == 3) {
-                                tiles.placeOnRandomTile(fL, assets.tile`myTile72`)
-                            } else {
-                                if (selectedIndex == 4) {
-                                    tiles.placeOnRandomTile(fL, assets.tile`myTile69`)
-                                } else if (selectedIndex == 5) {
-                                    tiles.placeOnRandomTile(fL, assets.tile`myTile73`)
-
-                                } else if (selectedIndex == 6) {
-                                    tiles.placeOnRandomTile(fL, assets.tile`myTile76`)
-                                }
-                            }
-                        }
-                    }
-                }
+                tiles.placeOnRandomTile(fL, selectedTilesCH1[selectedIndex])
             }
             if (THECHAPER == 1) {
-                
-                 if (selectedIndex == 0) {
-                     tiles.placeOnRandomTile(fL, assets.tile`myTile80`)
-            } else {
-                if (selectedIndex == 1) {
-                    tiles.placeOnRandomTile(fL, assets.tile`myTile81`)
-                } else {
-                    if (selectedIndex == 2) {
-                        tiles.placeOnRandomTile(fL, assets.tile`myTile67`)
-                    } else {
-                        if (selectedIndex == 3) {
-                            tiles.placeOnRandomTile(fL, assets.tile`myTile72`)
-                        } else {
-                            if (selectedIndex == 4) {
-                                tiles.placeOnRandomTile(fL, assets.tile`myTile69`)
-                            } else if (selectedIndex == 5) {
-                                tiles.placeOnRandomTile(fL, assets.tile`myTile73`)
-                            
-                            } else if (selectedIndex == 6) {
-                            tiles.placeOnRandomTile(fL, assets.tile`myTile76`)
-                            }
-                        }
-                    }
-                }
+                tiles.placeOnRandomTile(fL, selectedTilesCH2[selectedIndex])
             }
-            }
- 
         })
     }
 })
