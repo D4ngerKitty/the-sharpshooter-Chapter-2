@@ -1,16 +1,70 @@
 game.onUpdate(function() {
     if (currentMission == 1) {
-        if (sprites.allOfKind(SpriteKind.Enemy).length === 6) {
-            
+        if (sprites.allOfKind(SpriteKind.Enemy).length === 0) {
             endMission()
-            
-
         }
     }
-    info.setScore(currentMission)
+    if (currentMission == 2) {
+        for (let value of sprites.allOfKind(SpriteKind.EFIRE)) {
+            if (value.tileKindAt(TileDirection.Center, img`
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+            `)) {
+                endMission()
+                continue
+            }
+        }
+        
+        
+    }
+    if (currentMission == 2) {
+        if (sprites.allOfKind(SpriteKind.Enemy).length === 0) {
+            endMission(true)
+        }
+    }
 })
-function endMission() {
-    currentMission = 0
+function endMission(failed = false) {
+    for (let value of sprites.allOfKind(SpriteKind.EFIRE)) {
+        value.setVelocity(0, 0)
+    }
+    info.pauseCountup()
+    if (failed) {
+        game.splash("Mission Failed!")
+    } else {
+        game.splash(info.getTimeElapsed() + " Seconds")
+    }
+    info.clearCountup()    
+    sprites.destroyAllSpritesOfKind(SpriteKind.Food)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.EFIRE)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Player)
+    sprites.destroyAllSpritesOfKind(SpriteKind.MUSH)
+    sprites.destroyAllSpritesOfKind(SpriteKind.cat)
+    sprites.destroyAllSpritesOfKind(SpriteKind.NPC)
+    sprites.destroyAllSpritesOfKind(SpriteKind.MULTISHOTT)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Power)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Cam)
+    sprites.destroyAllSpritesOfKind(SpriteKind.background)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
+    sprites.destroyAllSpritesOfKind(SpriteKind.StatusBar)
+    sprites.destroyAllSpritesOfKind(SpriteKind.EFIRE)
+    sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
+    All_powers()
+    tileUtil.unloadTilemap()
     scene.setBackgroundImage(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
@@ -133,4 +187,13 @@ function endMission() {
     .....................................................................................................88888888888888.......888888888888888888888.................
     .....................................................................................................88888888888888.......888888888888888888888.................
     `)
+    menu = 2
+    Story1 = false
+    let myMenu = miniMenu.createMenu(
+        miniMenu.createMenuItem("1:Kill all enemies"),
+        miniMenu.createMenuItem("2:Lead a projectile to end"),
+        miniMenu.createMenuItem("3:Don't lose any health")
+    )
+    myMenu.setPosition(0, 0)
+    currentMission = 0
 }
