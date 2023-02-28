@@ -165,6 +165,7 @@ function doSomething() {
     }
     if (THECHAPER == 3) {
         tiles.setCurrentTilemap(tileUtil.cloneMap(Levelthing4[levelthing]))
+        currentMission = levelthing + 1
     }
     tiles.placeOnRandomTile(mySprite, assets.tile`myTile15`)
     for (let value3 of tiles.getTilesByType(assets.tile`myTile15`)) {
@@ -3971,6 +3972,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.EFIRE, function (sprite, otherSp
         otherSprite.setFlag(SpriteFlag.GhostThroughSprites, false)
     })
 })
+let currentMission = 0
 let dirXArray = [0, -1, 1, 0, -1, 1, 1, -1]
 let dirYArray = [-1, 0, 0, 1, 1, 1, -1, -1]
 let projectile2: Sprite = null
@@ -4137,7 +4139,7 @@ mySprite2 = sprites.create(img`
     .......777777777...7777.....7777777.....77777777....77777777.........777777777..7777.....777....7777777......7777777......7777......777777777777.....77777......
     ................................................................................................................................................................
     ................................................................................................................................................................
-    `, SpriteKind.background)
+`, SpriteKind.background)
 scene.setBackgroundImage(img`
     ................................................................................................................................................................
     ................................................................................................................................................................
