@@ -27,7 +27,8 @@
         "tilemap.g.jres",
         "tilemap.g.ts",
         "custom.ts",
-        "bossinlevel5.ts"
+        "bossinlevel5.ts",
+        "mission-conditions.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -36,7 +37,7 @@
         "branch": "v1.11.37",
         "tag": "v1.11.37",
         "commits": "https://github.com/microsoft/pxt-arcade/commits/bf992d35ca2baeaa26d773aac7caad5a152c45aa",
-        "target": "1.12.21",
+        "target": "1.12.22",
         "pxt": "8.4.30",
         "targetId": "arcade"
     },
