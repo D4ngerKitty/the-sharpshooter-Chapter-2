@@ -148,6 +148,12 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
+    
+    for (let i = 0; i < missionDeathOverride.length; i++) {
+        if (missionDeathOverride[i] = currentMission) {
+            return
+        }
+    }
     All_powers()
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
@@ -3972,7 +3978,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.EFIRE, function (sprite, otherSp
         otherSprite.setFlag(SpriteFlag.GhostThroughSprites, false)
     })
 })
+
 let currentMission = 0
+tiles.setCurrentTilemap(tilemap` `)
 let dirXArray = [0, -1, 1, 0, -1, 1, 1, -1]
 let dirYArray = [-1, 0, 0, 1, 1, 1, -1, -1]
 let projectile2: Sprite = null

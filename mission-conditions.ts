@@ -1,3 +1,4 @@
+let missionDeathOverride = [3]
 game.onUpdate(function() {
     if (currentMission == 1) {
         if (sprites.allOfKind(SpriteKind.Enemy).length === 0) {
@@ -35,6 +36,32 @@ game.onUpdate(function() {
         if (sprites.allOfKind(SpriteKind.Enemy).length === 0) {
             endMission(true)
         }
+    }
+    if (currentMission == 3) {
+        statusbar.max = 1
+        if (statusbar.value == 0) {
+            endMission(true)
+        }
+    }
+    if (mySprite.tileKindAt(TileDirection.Center, img`
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                f f f f f f f f 1 1 1 1 1 1 1 1
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+                1 1 1 1 1 1 1 1 f f f f f f f f
+    `)) {
+        endMission()
     }
 })
 function endMission(failed = false) {
