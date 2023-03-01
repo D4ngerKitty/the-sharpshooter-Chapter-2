@@ -42,8 +42,7 @@ game.onUpdate(function() {
         if (statusbar.value == 0) {
             endMission(true)
         }
-    }
-    if (mySprite.tileKindAt(TileDirection.Center, img`
+        if (mySprite.tileKindAt(TileDirection.Center, img`
                 f f f f f f f f 1 1 1 1 1 1 1 1
                 f f f f f f f f 1 1 1 1 1 1 1 1
                 f f f f f f f f 1 1 1 1 1 1 1 1
@@ -60,8 +59,9 @@ game.onUpdate(function() {
                 1 1 1 1 1 1 1 1 f f f f f f f f
                 1 1 1 1 1 1 1 1 f f f f f f f f
                 1 1 1 1 1 1 1 1 f f f f f f f f
-    `)) {
+        `)) {
         endMission()
+        }
     }
 })
 function endMission(failed = false) {
