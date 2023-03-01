@@ -18,7 +18,8 @@ let LEvelsthings = [
     tilemap`level46`
 ]
 let Levelthing4 = [
-    tilemap`level3`
+    tilemap`level3`,
+    tilemap`level6`
 ]
 //Moved the tiles representing each level in the world map into arrays
 let selectedTilesCH1 = [assets.tile`myTile63`,
