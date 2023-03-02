@@ -53,6 +53,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
     }
     otherSprite.destroy()
 })
+//Makes a projectile
 function generateProjectile(num: number, num2: number) {
     projectile = sprites.createProjectileFromSprite(img`
             b b
@@ -148,11 +149,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
-    
     for (let i = 0; i < missionDeathOverride.length; i++) {
-        if (missionDeathOverride[i] = currentMission) {
-            return
+        if (missionDeathOverride[i] == currentMission) {
+            game.splash("Try Again!")
         }
+    }
+    if (currentMission > 0) {
+        info.clearCountup()
+        info.startCountup()
     }
     All_powers()
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -252,23 +256,23 @@ function doSomething() {
     }
     for (let value5 of tiles.getTilesByType(assets.tile`myTile23`)) {
         E = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . c c c c c c c . . . . . . . . 
-            . c a a a a a c . . . . . . . . 
-            . c a b a b a c . . b . . . . . 
-            . c a b a a a c . b b . . . . . 
-            . c a c a a c c c c c c . . . . 
-            . c a a a a c c c c c c . . . . 
-            . c c c c c c c c c c 8 . . . . 
-            . . . . c c c c c c 8 c . . . . 
-            . . . b b b b b b b c c . . . . 
-            . . . . c c b c 8 b c c . . . . 
-            . . . . c c c 8 c c c c . . . . 
-            . . . . 8 8 8 c c c c c . . . . 
-            . . . . c c c c c c c c . . . . 
-            `, SpriteKind.Enemy)
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . . . . . . . . . . . . . . . .
+            . c c c c c c c . . . . . . . .
+            . c a a a a a c . . . . . . . .
+            . c a b a b a c . . b . . . . .
+            . c a b a a a c . b b . . . . .
+            . c a c a a c c c c c c . . . .
+            . c a a a a c c c c c c . . . .
+            . c c c c c c c c c c 8 . . . .
+            . . . . c c c c c c 8 c . . . .
+            . . . b b b b b b b c c . . . .
+            . . . . c c b c 8 b c c . . . .
+            . . . . c c c 8 c c c c . . . .
+            . . . . 8 8 8 c c c c c . . . .
+            . . . . c c c c c c c c . . . .
+        `, SpriteKind.Enemy)
         characterAnimations.loopFrames(
             E,
             [img`
@@ -392,7 +396,7 @@ function doSomething() {
         tiles.placeOnTile(E, value6)
         tiles.setTileAt(value6, assets.tile`transparency16`)
     }
-    for (let value7 of tiles.getTilesByType(assets.tile`myTile37`)) {
+    for (let value7 of tiles.getTilesByType(assets.tile`TurretTile`)) {
         E = sprites.create(img`
             ................................
             ..............aaaaaa............
@@ -4579,6 +4583,15 @@ forever(function () {
 forever(function () {
     if (!(spriteutils.isDestroyed(mySprite))) {
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile16`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             All_powers()
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)
@@ -4588,6 +4601,15 @@ forever(function () {
             doSomething()
         }
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile38`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)
             sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
@@ -4597,6 +4619,15 @@ forever(function () {
             doSomething()
         }
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile52`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             All_powers()
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)

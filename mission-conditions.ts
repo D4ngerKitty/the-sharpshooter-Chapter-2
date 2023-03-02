@@ -39,9 +39,6 @@ game.onUpdate(function() {
     }
     if (currentMission == 3) {
         statusbar.max = 1
-        if (statusbar.value == 0) {
-            endMission(true)
-        }
         if (mySprite.tileKindAt(TileDirection.Center, img`
                 f f f f f f f f 1 1 1 1 1 1 1 1
                 f f f f f f f f 1 1 1 1 1 1 1 1
@@ -74,6 +71,9 @@ function endMission(failed = false) {
     } else {
         game.splash(info.getTimeElapsed() + " Seconds")
     }
+
+    game.reset()
+    /*
     info.clearCountup()    
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
     sprites.destroyAllSpritesOfKind(SpriteKind.Player)
@@ -223,4 +223,5 @@ function endMission(failed = false) {
     )
     myMenu.setPosition(0, 0)
     currentMission = 0
+    */
 }
