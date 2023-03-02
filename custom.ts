@@ -149,11 +149,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
-    
     for (let i = 0; i < missionDeathOverride.length; i++) {
-        if (missionDeathOverride[i] = currentMission) {
-            return
+        if (missionDeathOverride[i] == currentMission) {
+            game.splash("Try Again!")
         }
+    }
+    if (currentMission > 0) {
+        info.clearCountup()
+        info.startCountup()
     }
     All_powers()
     sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
@@ -4580,6 +4583,15 @@ forever(function () {
 forever(function () {
     if (!(spriteutils.isDestroyed(mySprite))) {
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile16`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             All_powers()
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)
@@ -4589,6 +4601,15 @@ forever(function () {
             doSomething()
         }
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile38`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)
             sprites.destroyAllSpritesOfKind(SpriteKind.Projectile)
@@ -4598,6 +4619,15 @@ forever(function () {
             doSomething()
         }
         if (mySprite.tileKindAt(TileDirection.Center, assets.tile`myTile52`)) {
+            for (let i = 0; i < missionDeathOverride.length; i++) {
+                if (missionDeathOverride[i] == currentMission) {
+                    game.splash("Try Again!")
+                }
+            }
+            if (currentMission > 0) {
+                info.clearCountup()
+                info.startCountup()
+            }
             All_powers()
             sprites.destroyAllSpritesOfKind(SpriteKind.Enemy)
             sprites.destroyAllSpritesOfKind(SpriteKind.Food)
